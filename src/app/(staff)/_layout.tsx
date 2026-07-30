@@ -9,21 +9,21 @@ export default function StaffLayout() {
     <Tabs
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#030712', // bg-gray-950
+          backgroundColor: '#f7f9fb', // bg-surface
           borderBottomWidth: 1,
-          borderBottomColor: '#1f2937', // border-gray-800
+          borderBottomColor: '#c5c5d3', // border-outline-variant
         },
-        headerTintColor: '#fff',
+        headerTintColor: '#191c1e',
         tabBarStyle: {
-          backgroundColor: '#030712', // bg-gray-950
+          backgroundColor: '#f7f9fb',
           borderTopWidth: 1,
-          borderTopColor: '#1f2937', // border-gray-800
+          borderTopColor: '#c5c5d3',
         },
-        tabBarActiveTintColor: '#3b82f6', // text-blue-500
-        tabBarInactiveTintColor: '#6b7280', // text-gray-500
+        tabBarActiveTintColor: '#1e3a8a', // text-primary-container
+        tabBarInactiveTintColor: '#757682', // text-outline
         headerRight: () => (
-          <Pressable onPress={signOut} className="mr-4 px-3 py-1 bg-red-900/50 rounded-full border border-red-800">
-            <Text className="text-red-400 font-medium">Sign Out</Text>
+          <Pressable onPress={signOut} className="mr-4 px-3 py-1 bg-error-container rounded-full border border-error">
+            <Text className="text-error font-medium">Sign Out</Text>
           </Pressable>
         ),
       }}
@@ -54,6 +54,13 @@ export default function StaffLayout() {
         options={{
           title: 'Expenses',
           tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 20 }}>📊</Text>,
+        }}
+      />
+      <Tabs.Screen
+        name="report"
+        options={{
+          title: 'AI Refiner',
+          tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 20 }}>✨</Text>,
         }}
       />
     </Tabs>

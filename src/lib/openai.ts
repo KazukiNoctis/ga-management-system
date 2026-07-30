@@ -1,43 +1,21 @@
+import { supabase } from './supabase';
 import { CheckingForm } from '../types';
 
 export async function generateGASummary(forms: CheckingForm[]): Promise<string> {
-  const apiKey = process.env.EXPO_PUBLIC_OPENAI_API_KEY;
-  
-  if (!apiKey) {
-    throw new Error('OpenAI API key is missing');
-  }
-
-  const prompt = `Create a professional General Affairs activity summary based on the following checking forms:
-${JSON.stringify(forms, null, 2)}`;
-
   try {
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        messages: [
-          {
-            role: 'system',
-            content: 'You are an assistant that summarizes General Affairs checking forms into a professional, concise summary.',
-          },
-          {
-            role: 'user',
-            content: prompt,
-          },
-        ],
-      }),
+    const { data, error } = await supabase.functions.invoke('generate-report', {
+      body: { forms }
     });
 
-    if (!response.ok) {
-      throw new Error(`OpenAI API error: ${response.statusText}`);
+    if (error) {
+      throw new Error(`Edge function error: ${error.message}`);
     }
 
-    const data = await response.json();
-    return data.choices[0].message.content;
+    if (data?.error) {
+      throw new Error(`Report generation failed: ${data.error}`);
+    }
+
+    return data.report;
   } catch (error) {
     console.error('Error generating GA summary:', error);
     throw error;

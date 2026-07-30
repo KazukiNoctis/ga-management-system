@@ -66,44 +66,44 @@ export default function AdminDashboard() {
   };
 
   return (
-    <ScrollView className="flex-1 bg-gray-950 p-4">
+    <ScrollView className="flex-1 bg-background p-4">
       <View className="mb-6 flex-row items-center justify-between">
         <View>
-          <Text className="text-white text-2xl font-bold">Welcome, {profile?.full_name}</Text>
-          <View className="bg-purple-600 self-start px-2 py-1 rounded mt-1">
-            <Text className="text-white text-xs font-bold uppercase">Admin</Text>
+          <Text className="text-on-surface text-2xl font-bold">Welcome, {profile?.full_name}</Text>
+          <View className="bg-primary-container self-start px-2 py-1 rounded mt-1">
+            <Text className="text-on-primary text-xs font-bold uppercase">Admin</Text>
           </View>
         </View>
         <Pressable 
           onPress={handleSignOut}
-          className="bg-red-600 px-4 py-2 rounded-lg"
+          className="bg-error px-4 py-2 rounded-lg"
         >
           <Text className="text-white font-medium">Sign Out</Text>
         </Pressable>
       </View>
 
       {loading ? (
-        <ActivityIndicator size="large" color="#9333ea" />
+        <ActivityIndicator size="large" color="#1e3a8a" />
       ) : (
         <View className="flex-row flex-wrap justify-between">
-          <View className="bg-gray-800 p-4 rounded-2xl border border-gray-700 w-[48%] mb-4">
-            <Text className="text-gray-400 text-sm mb-1">Total Branches</Text>
-            <Text className="text-white text-3xl font-bold">{stats.branches}</Text>
+          <View className="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant shadow-sm w-[48%] mb-4">
+            <Text className="text-on-surface-variant text-sm mb-1">Total Branches</Text>
+            <Text className="text-on-surface text-3xl font-bold">{stats.branches}</Text>
           </View>
           
-          <View className="bg-gray-800 p-4 rounded-2xl border border-gray-700 w-[48%] mb-4">
-            <Text className="text-gray-400 text-sm mb-1">Branch Staff</Text>
-            <Text className="text-white text-3xl font-bold">{stats.staff}</Text>
+          <View className="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant shadow-sm w-[48%] mb-4">
+            <Text className="text-on-surface-variant text-sm mb-1">Branch Staff</Text>
+            <Text className="text-on-surface text-3xl font-bold">{stats.staff}</Text>
           </View>
           
-          <View className="bg-gray-800 p-4 rounded-2xl border border-gray-700 w-[48%] mb-4">
-            <Text className="text-gray-400 text-sm mb-1">Branch Expenses</Text>
-            <Text className="text-white text-3xl font-bold">{stats.expenses}</Text>
+          <View className="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant shadow-sm w-[48%] mb-4">
+            <Text className="text-on-surface-variant text-sm mb-1">Branch Expenses</Text>
+            <Text className="text-on-surface text-3xl font-bold">{stats.expenses}</Text>
           </View>
           
-          <View className="bg-gray-800 p-4 rounded-2xl border border-gray-700 w-[48%] mb-4">
-            <Text className="text-gray-400 text-sm mb-1">Checking Forms</Text>
-            <Text className="text-white text-3xl font-bold">{stats.checkingForms}</Text>
+          <View className="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant shadow-sm w-[48%] mb-4">
+            <Text className="text-on-surface-variant text-sm mb-1">Checking Forms</Text>
+            <Text className="text-on-surface text-3xl font-bold">{stats.checkingForms}</Text>
           </View>
         </View>
       )}

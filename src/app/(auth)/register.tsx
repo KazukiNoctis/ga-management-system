@@ -58,32 +58,32 @@ export default function RegisterScreen() {
   return (
     <KeyboardAvoidingView 
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      className="flex-1 bg-gray-900"
+      className="flex-1 bg-background"
     >
       <ScrollView contentContainerClassName="flex-grow px-6 py-12 justify-center">
         <View className="mb-8 items-center">
-          <Text className="text-3xl font-bold text-white mb-2">Create Account</Text>
-          <Text className="text-gray-400 text-base">Join the GA Management system</Text>
+          <Text className="text-3xl font-bold text-primary mb-2">Create Account</Text>
+          <Text className="text-on-surface-variant text-base">Join the GA Management system</Text>
         </View>
 
         <View className="space-y-4 mb-6">
           <View>
-            <Text className="text-gray-300 font-medium mb-2 ml-1">Full Name</Text>
+            <Text className="text-on-surface font-semibold mb-2 ml-1">Full Name</Text>
             <TextInput
-              className="w-full bg-gray-800 text-white rounded-xl px-4 py-4 border border-gray-700 focus:border-indigo-500"
+              className="w-full bg-surface-container-lowest text-on-surface rounded-lg px-4 py-4 border border-outline-variant focus:border-primary-container"
               placeholder="Enter your full name"
-              placeholderTextColor="#9ca3af"
+              placeholderTextColor="#757682"
               value={fullName}
               onChangeText={setFullName}
             />
           </View>
 
           <View className="mt-4">
-            <Text className="text-gray-300 font-medium mb-2 ml-1">Email</Text>
+            <Text className="text-on-surface font-semibold mb-2 ml-1">Email</Text>
             <TextInput
-              className="w-full bg-gray-800 text-white rounded-xl px-4 py-4 border border-gray-700 focus:border-indigo-500"
+              className="w-full bg-surface-container-lowest text-on-surface rounded-lg px-4 py-4 border border-outline-variant focus:border-primary-container"
               placeholder="Enter your email"
-              placeholderTextColor="#9ca3af"
+              placeholderTextColor="#757682"
               value={email}
               onChangeText={setEmail}
               autoCapitalize="none"
@@ -92,11 +92,11 @@ export default function RegisterScreen() {
           </View>
 
           <View className="mt-4">
-            <Text className="text-gray-300 font-medium mb-2 ml-1">Password</Text>
+            <Text className="text-on-surface font-semibold mb-2 ml-1">Password</Text>
             <TextInput
-              className="w-full bg-gray-800 text-white rounded-xl px-4 py-4 border border-gray-700 focus:border-indigo-500"
+              className="w-full bg-surface-container-lowest text-on-surface rounded-lg px-4 py-4 border border-outline-variant focus:border-primary-container"
               placeholder="Create a password"
-              placeholderTextColor="#9ca3af"
+              placeholderTextColor="#757682"
               value={password}
               onChangeText={setPassword}
               secureTextEntry
@@ -104,9 +104,9 @@ export default function RegisterScreen() {
           </View>
           
           <View className="mt-4">
-            <Text className="text-gray-300 font-medium mb-2 ml-1">Select Branch</Text>
+            <Text className="text-on-surface font-semibold mb-2 ml-1">Select Branch</Text>
             {fetchingBranches ? (
-              <ActivityIndicator size="small" color="#4F46E5" className="py-4" />
+              <ActivityIndicator size="small" color="#1e3a8a" className="py-4" />
             ) : (
               <View className="flex-row flex-wrap gap-2">
                 {branches.map((branch) => (
@@ -115,12 +115,12 @@ export default function RegisterScreen() {
                     onPress={() => setSelectedBranch(branch.id)}
                     className={`px-4 py-3 rounded-lg border ${
                       selectedBranch === branch.id 
-                        ? 'bg-indigo-600/20 border-indigo-500' 
-                        : 'bg-gray-800 border-gray-700'
+                        ? 'bg-primary-container/10 border-primary-container' 
+                        : 'bg-surface-container-lowest border-outline-variant'
                     }`}
                   >
                     <Text className={`${
-                      selectedBranch === branch.id ? 'text-indigo-400 font-semibold' : 'text-gray-300'
+                      selectedBranch === branch.id ? 'text-primary font-semibold' : 'text-on-surface'
                     }`}>
                       {branch.name}
                     </Text>
@@ -132,7 +132,7 @@ export default function RegisterScreen() {
         </View>
 
         <Pressable
-          className={`w-full bg-indigo-600 rounded-xl py-4 items-center mt-4 ${loading ? 'opacity-70' : 'opacity-100'}`}
+          className={`w-full bg-primary-container rounded-lg py-4 items-center mt-4 ${loading ? 'opacity-70' : 'opacity-100'}`}
           onPress={handleRegister}
           disabled={loading}
         >
@@ -144,10 +144,10 @@ export default function RegisterScreen() {
         </Pressable>
 
         <View className="flex-row justify-center mt-8 pb-8">
-          <Text className="text-gray-400">Already have an account? </Text>
+          <Text className="text-on-surface-variant">Already have an account? </Text>
           <Link href="/(auth)/login" asChild>
             <Pressable>
-              <Text className="text-indigo-400 font-semibold">Sign In</Text>
+              <Text className="text-primary font-semibold">Sign In</Text>
             </Pressable>
           </Link>
         </View>

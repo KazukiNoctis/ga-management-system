@@ -56,15 +56,15 @@ export default function ExpensesScreen() {
   };
 
   const renderItem = ({ item }: { item: ExpenseWithProfile }) => (
-    <View className="bg-gray-800 p-4 rounded-2xl border border-gray-700 mb-4">
+    <View className="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant shadow-sm mb-4">
       <View className="flex-row justify-between items-start mb-2">
-        <Text className="text-white text-lg font-bold flex-1">{item.title}</Text>
-        <Text className="text-red-400 font-bold ml-2">{formatIDR(item.amount)}</Text>
+        <Text className="text-on-surface text-lg font-bold flex-1">{item.title}</Text>
+        <Text className="text-error font-bold ml-2">{formatIDR(item.amount)}</Text>
       </View>
-      <Text className="text-gray-300 mb-2">{item.description}</Text>
-      <View className="flex-row justify-between items-center mt-2 border-t border-gray-700 pt-2">
-        <Text className="text-gray-400 text-sm">👤 {item.profiles?.full_name || 'Unknown'}</Text>
-        <Text className="text-gray-500 text-xs">
+      <Text className="text-on-surface-variant mb-2">{item.description}</Text>
+      <View className="flex-row justify-between items-center mt-2 border-t border-outline-variant pt-2">
+        <Text className="text-on-surface-variant text-sm">👤 {item.profiles?.full_name || 'Unknown'}</Text>
+        <Text className="text-outline text-xs">
           {new Date(item.created_at).toLocaleDateString()}
         </Text>
       </View>
@@ -72,14 +72,14 @@ export default function ExpensesScreen() {
   );
 
   return (
-    <View className="flex-1 bg-gray-950 p-4">
-      <View className="bg-gray-900 p-4 rounded-2xl border border-gray-700 mb-4 items-center">
-        <Text className="text-gray-400 text-sm mb-1">Total Branch Expenses</Text>
-        <Text className="text-white text-3xl font-bold text-red-400">{formatIDR(totalAmount)}</Text>
+    <View className="flex-1 bg-background p-4">
+      <View className="bg-primary-container p-4 rounded-xl border border-primary-container mb-4 items-center">
+        <Text className="text-on-primary-container text-sm mb-1">Total Branch Expenses</Text>
+        <Text className="text-on-primary text-3xl font-bold">{formatIDR(totalAmount)}</Text>
       </View>
 
       {loading ? (
-        <ActivityIndicator size="large" color="#3b82f6" className="mt-10" />
+        <ActivityIndicator size="large" color="#1e3a8a" className="mt-10" />
       ) : (
         <FlatList
           data={expenses}
@@ -87,10 +87,10 @@ export default function ExpensesScreen() {
           renderItem={renderItem}
           contentContainerStyle={{ paddingBottom: 20 }}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#3b82f6" />
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#1e3a8a" />
           }
           ListEmptyComponent={
-            <Text className="text-gray-500 text-center mt-10">No expenses found</Text>
+            <Text className="text-outline text-center mt-10">No expenses found</Text>
           }
         />
       )}

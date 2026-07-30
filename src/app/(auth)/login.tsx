@@ -28,20 +28,20 @@ export default function LoginScreen() {
   return (
     <KeyboardAvoidingView 
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      className="flex-1 bg-gray-900 justify-center px-6"
+      className="flex-1 bg-background justify-center px-6"
     >
       <View className="mb-10 mt-12 items-center">
-        <Text className="text-4xl font-bold text-white mb-2">GA Management 🏢</Text>
-        <Text className="text-gray-400 text-base">Sign in to your account to continue</Text>
+        <Text className="text-4xl font-bold text-primary mb-2">GA Management 🏢</Text>
+        <Text className="text-on-surface-variant text-base">Sign in to your account to continue</Text>
       </View>
 
       <View className="space-y-4 mb-6">
         <View>
-          <Text className="text-gray-300 font-medium mb-2 ml-1">Email</Text>
+          <Text className="text-on-surface font-semibold mb-2 ml-1">Email</Text>
           <TextInput
-            className="w-full bg-gray-800 text-white rounded-xl px-4 py-4 border border-gray-700 focus:border-indigo-500"
+            className="w-full bg-surface-container-lowest text-on-surface rounded-lg px-4 py-4 border border-outline-variant focus:border-primary-container"
             placeholder="Enter your email"
-            placeholderTextColor="#9ca3af"
+            placeholderTextColor="#757682"
             value={email}
             onChangeText={setEmail}
             autoCapitalize="none"
@@ -50,11 +50,11 @@ export default function LoginScreen() {
         </View>
 
         <View className="mt-4">
-          <Text className="text-gray-300 font-medium mb-2 ml-1">Password</Text>
+          <Text className="text-on-surface font-semibold mb-2 ml-1">Password</Text>
           <TextInput
-            className="w-full bg-gray-800 text-white rounded-xl px-4 py-4 border border-gray-700 focus:border-indigo-500"
+            className="w-full bg-surface-container-lowest text-on-surface rounded-lg px-4 py-4 border border-outline-variant focus:border-primary-container"
             placeholder="Enter your password"
-            placeholderTextColor="#9ca3af"
+            placeholderTextColor="#757682"
             value={password}
             onChangeText={setPassword}
             secureTextEntry
@@ -63,7 +63,7 @@ export default function LoginScreen() {
       </View>
 
       <Pressable
-        className={`w-full bg-indigo-600 rounded-xl py-4 items-center mt-2 ${loading ? 'opacity-70' : 'opacity-100'}`}
+        className={`w-full bg-primary-container rounded-lg py-4 items-center mt-2 ${loading ? 'opacity-70' : 'opacity-100'}`}
         onPress={handleLogin}
         disabled={loading}
       >
@@ -75,10 +75,10 @@ export default function LoginScreen() {
       </Pressable>
 
       <View className="flex-row justify-center mt-8">
-        <Text className="text-gray-400">Don't have an account? </Text>
+        <Text className="text-on-surface-variant">Don't have an account? </Text>
         <Link href="/(auth)/register" asChild>
           <Pressable>
-            <Text className="text-indigo-400 font-semibold">Sign Up</Text>
+            <Text className="text-primary font-semibold">Sign Up</Text>
           </Pressable>
         </Link>
       </View>

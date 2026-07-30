@@ -6,14 +6,15 @@ export default function AdminLayout() {
     <Tabs
       screenOptions={{
         headerShown: true,
-        headerStyle: { backgroundColor: '#111827' }, // gray-900
-        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: '#f7f9fb' }, // background
+        headerTintColor: '#191c1e',
         tabBarStyle: {
-          backgroundColor: '#111827', // gray-900
-          borderTopWidth: 0,
+          backgroundColor: '#f7f9fb', // background
+          borderTopWidth: 1,
+          borderTopColor: '#c5c5d3',
         },
-        tabBarActiveTintColor: '#3b82f6', // blue-500
-        tabBarInactiveTintColor: '#6b7280', // gray-500
+        tabBarActiveTintColor: '#1e3a8a', // primary-container
+        tabBarInactiveTintColor: '#757682', // outline
       }}
     >
       <Tabs.Screen
@@ -40,7 +41,7 @@ export default function AdminLayout() {
       <Tabs.Screen
         name="report"
         options={{
-          title: 'AI Report',
+          title: 'AI Logs',
           tabBarIcon: ({ color }) => <Text style={{ fontSize: 24, color }}>🤖</Text>,
         }}
       />

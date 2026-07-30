@@ -56,35 +56,35 @@ export default function BranchesScreen() {
   };
 
   const renderItem = ({ item }: { item: Branch }) => (
-    <View className="bg-gray-800 p-4 rounded-2xl border border-gray-700 mb-4">
-      <Text className="text-white text-lg font-bold">{item.name}</Text>
-      <Text className="text-gray-300 mt-1">📍 {item.location}</Text>
-      <Text className="text-gray-500 text-xs mt-2">
+    <View className="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant shadow-sm mb-4">
+      <Text className="text-on-surface text-lg font-bold">{item.name}</Text>
+      <Text className="text-on-surface-variant mt-1">📍 {item.location}</Text>
+      <Text className="text-outline text-xs mt-2">
         Added: {new Date(item.created_at).toLocaleDateString()}
       </Text>
     </View>
   );
 
   return (
-    <View className="flex-1 bg-gray-950 p-4">
-      <View className="bg-gray-900 p-4 rounded-2xl border border-gray-700 mb-6">
-        <Text className="text-white text-lg font-bold mb-3">Add New Branch</Text>
+    <View className="flex-1 bg-background p-4">
+      <View className="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant shadow-sm mb-6">
+        <Text className="text-on-surface text-lg font-bold mb-3">Add New Branch</Text>
         <TextInput
-          className="bg-gray-800 text-white p-3 rounded-lg border border-gray-700 mb-3"
+          className="bg-surface-container-lowest text-on-surface p-3 rounded-lg border border-outline-variant mb-3"
           placeholder="Branch Name"
-          placeholderTextColor="#6b7280"
+          placeholderTextColor="#757682"
           value={name}
           onChangeText={setName}
         />
         <TextInput
-          className="bg-gray-800 text-white p-3 rounded-lg border border-gray-700 mb-3"
+          className="bg-surface-container-lowest text-on-surface p-3 rounded-lg border border-outline-variant mb-3"
           placeholder="Location"
-          placeholderTextColor="#6b7280"
+          placeholderTextColor="#757682"
           value={location}
           onChangeText={setLocation}
         />
         <Pressable 
-          className="bg-blue-600 p-3 rounded-lg items-center"
+          className="bg-primary-container p-3 rounded-lg items-center"
           onPress={handleAddBranch}
           disabled={adding}
         >
@@ -96,10 +96,10 @@ export default function BranchesScreen() {
         </Pressable>
       </View>
 
-      <Text className="text-white text-xl font-bold mb-4">Branch List</Text>
+      <Text className="text-on-surface text-xl font-bold mb-4">Branch List</Text>
       
       {loading ? (
-        <ActivityIndicator size="large" color="#3b82f6" />
+        <ActivityIndicator size="large" color="#1e3a8a" />
       ) : (
         <FlatList
           data={branches}
@@ -107,7 +107,7 @@ export default function BranchesScreen() {
           renderItem={renderItem}
           contentContainerStyle={{ paddingBottom: 20 }}
           ListEmptyComponent={
-            <Text className="text-gray-500 text-center mt-4">No branches found</Text>
+            <Text className="text-outline text-center mt-4">No branches found</Text>
           }
         />
       )}

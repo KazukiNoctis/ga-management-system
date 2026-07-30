@@ -65,24 +65,24 @@ export default function CheckingFormScreen() {
   };
 
   return (
-    <ScrollView className="flex-1 bg-gray-950 p-4">
+    <ScrollView className="flex-1 bg-background p-4">
       <View className="mb-6">
-        <Text className="text-gray-300 font-medium mb-2">Title</Text>
+        <Text className="text-on-surface font-semibold mb-2">Title</Text>
         <TextInput
-          className="bg-gray-900 border border-gray-800 text-white rounded-xl p-4 text-base"
+          className="bg-surface-container-lowest border border-outline-variant text-on-surface rounded-lg p-4 text-base"
           placeholder="E.g., Morning AC Check"
-          placeholderTextColor="#6b7280"
+          placeholderTextColor="#757682"
           value={title}
           onChangeText={setTitle}
         />
       </View>
 
       <View className="mb-6">
-        <Text className="text-gray-300 font-medium mb-2">Notes</Text>
+        <Text className="text-on-surface font-semibold mb-2">Notes</Text>
         <TextInput
-          className="bg-gray-900 border border-gray-800 text-white rounded-xl p-4 text-base h-32"
+          className="bg-surface-container-lowest border border-outline-variant text-on-surface rounded-lg p-4 text-base h-32"
           placeholder="Describe the condition..."
-          placeholderTextColor="#6b7280"
+          placeholderTextColor="#757682"
           multiline
           textAlignVertical="top"
           value={note}
@@ -91,17 +91,17 @@ export default function CheckingFormScreen() {
       </View>
 
       <View className="mb-8">
-        <Text className="text-gray-300 font-medium mb-2">Photo Proof</Text>
+        <Text className="text-on-surface font-semibold mb-2">Photo Proof</Text>
         
         {imageUri ? (
           <View className="relative mb-4">
             <Image 
               source={{ uri: imageUri }} 
-              className="w-full h-48 rounded-xl bg-gray-800" 
+              className="w-full h-48 rounded-xl bg-surface-container" 
               resizeMode="cover" 
             />
             <Pressable 
-              className="absolute top-2 right-2 bg-red-500/80 p-2 rounded-full"
+              className="absolute top-2 right-2 bg-error/80 p-2 rounded-full"
               onPress={() => setImageUri(null)}
             >
               <Text className="text-white text-xs font-bold">Remove</Text>
@@ -112,21 +112,21 @@ export default function CheckingFormScreen() {
         <View className="flex-row gap-4">
           <Pressable 
             onPress={handleTakePhoto}
-            className="flex-1 bg-gray-800 border border-gray-700 py-3 rounded-xl items-center"
+            className="flex-1 bg-surface-container border border-outline-variant py-3 rounded-xl items-center"
           >
-            <Text className="text-gray-300 font-medium">📷 Take Photo</Text>
+            <Text className="text-on-surface-variant font-medium">📷 Take Photo</Text>
           </Pressable>
           <Pressable 
             onPress={handlePickImage}
-            className="flex-1 bg-gray-800 border border-gray-700 py-3 rounded-xl items-center"
+            className="flex-1 bg-surface-container border border-outline-variant py-3 rounded-xl items-center"
           >
-            <Text className="text-gray-300 font-medium">🖼️ Pick Image</Text>
+            <Text className="text-on-surface-variant font-medium">🖼️ Pick Image</Text>
           </Pressable>
         </View>
       </View>
 
       <View className="mb-6 items-center">
-        <Text className="text-gray-500 text-sm">
+        <Text className="text-outline text-sm">
           Auto-timestamp: {new Date().toLocaleString()}
         </Text>
       </View>
@@ -134,7 +134,7 @@ export default function CheckingFormScreen() {
       <Pressable 
         onPress={handleSubmit}
         disabled={loading}
-        className={`bg-blue-600 rounded-xl p-4 items-center mb-10 ${loading ? 'opacity-70' : 'opacity-100'}`}
+        className={`bg-primary-container rounded-lg p-4 items-center mb-10 ${loading ? 'opacity-70' : 'opacity-100'}`}
       >
         {loading ? (
           <ActivityIndicator color="#fff" />
