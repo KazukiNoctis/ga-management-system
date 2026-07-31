@@ -46,7 +46,7 @@ export default function ExpenseTracking() {
     );
   }
 
-  const totalBudget = 45000;
+  const totalBudget = 0;
   const actualExpenditure = expenses.reduce((sum, exp) => sum + Number(exp.amount), 0);
   const remaining = totalBudget - actualExpenditure;
 
@@ -118,8 +118,10 @@ export default function ExpenseTracking() {
               </View>
             </View>
             <Text className="text-[12px] text-white/80 uppercase tracking-wider mb-1">Remaining Balance</Text>
-            <Text className="text-[24px] font-bold text-white">${remaining.toLocaleString(undefined, {minimumFractionDigits: 2})}</Text>
-            <Text className="text-[12px] text-white/70 mt-4">Variance is within safe operational margins.</Text>
+            <Text className="text-[24px] font-bold text-white">
+              {totalBudget > 0 ? `$${remaining.toLocaleString(undefined, {minimumFractionDigits: 2})}` : 'No Budget Set'}
+            </Text>
+            <Text className="text-[12px] text-white/70 mt-4">Variance data unavailable.</Text>
           </View>
         </View>
 
@@ -216,37 +218,37 @@ export default function ExpenseTracking() {
               <View>
                 <View className="flex-row justify-between mb-1">
                   <Text className="text-[12px]">Fixed Costs</Text>
-                  <Text className="text-[12px] font-bold">45%</Text>
+                  <Text className="text-[12px] font-bold">0%</Text>
                 </View>
                 <View className="h-2 w-full bg-surface-container-low rounded-full">
-                  <View className="h-full bg-primary rounded-full" style={{ width: '45%' }} />
+                  <View className="h-full bg-primary rounded-full" style={{ width: '0%' }} />
                 </View>
               </View>
               <View>
                 <View className="flex-row justify-between mb-1">
                   <Text className="text-[12px]">Hardware & IT</Text>
-                  <Text className="text-[12px] font-bold">30%</Text>
+                  <Text className="text-[12px] font-bold">0%</Text>
                 </View>
                 <View className="h-2 w-full bg-surface-container-low rounded-full">
-                  <View className="h-full bg-secondary rounded-full" style={{ width: '30%' }} />
+                  <View className="h-full bg-secondary rounded-full" style={{ width: '0%' }} />
                 </View>
               </View>
               <View>
                 <View className="flex-row justify-between mb-1">
                   <Text className="text-[12px]">Operations</Text>
-                  <Text className="text-[12px] font-bold">15%</Text>
+                  <Text className="text-[12px] font-bold">0%</Text>
                 </View>
                 <View className="h-2 w-full bg-surface-container-low rounded-full">
-                  <View className="h-full bg-[#54647a] rounded-full" style={{ width: '15%' }} />
+                  <View className="h-full bg-[#54647a] rounded-full" style={{ width: '0%' }} />
                 </View>
               </View>
               <View>
                 <View className="flex-row justify-between mb-1">
                   <Text className="text-[12px]">Travel & Misc</Text>
-                  <Text className="text-[12px] font-bold">10%</Text>
+                  <Text className="text-[12px] font-bold">0%</Text>
                 </View>
                 <View className="h-2 w-full bg-surface-container-low rounded-full">
-                  <View className="h-full bg-outline rounded-full" style={{ width: '10%' }} />
+                  <View className="h-full bg-outline rounded-full" style={{ width: '0%' }} />
                 </View>
               </View>
             </View>
@@ -255,16 +257,16 @@ export default function ExpenseTracking() {
           <View className="lg:flex-1 bg-white p-6 rounded-xl border border-outline-variant shadow-sm justify-between">
             <View>
               <Text className="text-[20px] font-bold text-on-surface mb-2">Budget Forecast</Text>
-              <Text className="text-[14px] text-secondary mb-6">Based on current spending patterns, you are projected to finish the month with a $4,200 surplus.</Text>
+              <Text className="text-[14px] text-secondary mb-6">Insufficient historical data to generate an accurate forecast for the current month.</Text>
             </View>
             <View className="flex-row items-center gap-6">
               <View className="flex-1">
                 <Text className="text-[12px] text-secondary uppercase mb-1">Predicted Total</Text>
-                <Text className="text-[24px] font-bold text-emerald-600">$40,800.00</Text>
+                <Text className="text-[24px] font-bold text-secondary">$0.00</Text>
               </View>
               <View className="h-24 w-24 relative items-center justify-center">
-                 <View className="w-20 h-20 rounded-full border-[8px] border-emerald-500 border-r-surface-container-low items-center justify-center">
-                    <Text className="font-bold text-emerald-700 text-[14px]">80%</Text>
+                 <View className="w-20 h-20 rounded-full border-[8px] border-surface-container-low items-center justify-center">
+                    <Text className="font-bold text-secondary text-[14px]">0%</Text>
                  </View>
               </View>
             </View>

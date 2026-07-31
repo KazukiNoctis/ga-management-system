@@ -93,7 +93,7 @@ export default function TaskOversight() {
             <View className="flex-1 min-w-[200px] bg-white p-6 rounded-xl border border-outline-variant shadow-sm h-32 justify-between">
               <Text className="text-[12px] font-bold text-secondary uppercase tracking-widest">Completed Today</Text>
               <View className="flex-row items-end justify-between">
-                <Text className="text-[32px] font-bold text-[#27c38a]">{tasks.slice(0, 5).length}</Text>
+                <Text className="text-[32px] font-bold text-[#27c38a]">0</Text>
                 <View className="bg-teal-50 px-2 py-1 rounded-full">
                   <Text className="text-[12px] font-bold text-[#4edea3]">Peak</Text>
                 </View>
@@ -212,16 +212,16 @@ export default function TaskOversight() {
             <View className="lg:flex-[2] bg-white rounded-xl border border-outline-variant p-6 shadow-sm">
               <View className="flex-row items-center justify-between mb-6">
                 <Text className="text-[20px] font-bold text-primary">Department Activity</Text>
-                <Text className="text-[12px] text-secondary">Live Update</Text>
+                <Text className="text-[12px] text-secondary">No Data Available</Text>
               </View>
               <View className="h-64 flex-row items-end justify-between gap-4 px-4">
                 {/* Simulated Bar Chart via Flexbox */}
                 {[
-                  { label: 'Ops', height: '65%', color: 'bg-primary/20' },
-                  { label: 'Admin', height: '40%', color: 'bg-primary/40' },
-                  { label: 'Logistics', height: '85%', color: 'bg-primary' },
-                  { label: 'HR', height: '55%', color: 'bg-primary/30' },
-                  { label: 'Legal', height: '70%', color: 'bg-primary/70' }
+                  { label: 'Ops', height: '0%', color: 'bg-primary/20' },
+                  { label: 'Admin', height: '0%', color: 'bg-primary/40' },
+                  { label: 'Logistics', height: '0%', color: 'bg-primary' },
+                  { label: 'HR', height: '0%', color: 'bg-primary/30' },
+                  { label: 'Legal', height: '0%', color: 'bg-primary/70' }
                 ].map((bar, i) => (
                   <View key={i} className="flex-1 items-center gap-2">
                     <View className={`w-full rounded-t-lg ${bar.color}`} style={{ height: bar.height }} />
@@ -238,36 +238,14 @@ export default function TaskOversight() {
                 <Text className="text-[12px] text-blue-200 mb-6">High efficiency staff this month.</Text>
                 
                 <View className="gap-4">
-                  <View className="flex-row items-center justify-between p-3 bg-white/10 rounded-lg">
-                    <View className="flex-row items-center gap-3">
-                      <View className="w-8 h-8 rounded-full border-2 border-white/20 bg-[#00311f] items-center justify-center">
-                        <Text className="font-bold text-[10px] text-white">AD</Text>
-                      </View>
-                      <View>
-                        <Text className="font-bold text-[12px] text-white">Alice Doe</Text>
-                        <Text className="text-[10px] text-blue-200">24 Tasks Finished</Text>
-                      </View>
-                    </View>
-                    <MaterialIcons name="military-tech" size={20} color="#6ffbbe" />
-                  </View>
-
-                  <View className="flex-row items-center justify-between p-3 bg-white/10 rounded-lg">
-                    <View className="flex-row items-center gap-3">
-                      <View className="w-8 h-8 rounded-full border-2 border-white/20 bg-secondary items-center justify-center">
-                        <Text className="font-bold text-[10px] text-white">JD</Text>
-                      </View>
-                      <View>
-                        <Text className="font-bold text-[12px] text-white">John Doe</Text>
-                        <Text className="text-[10px] text-blue-200">18 Tasks Finished</Text>
-                      </View>
-                    </View>
-                    <MaterialIcons name="military-tech" size={20} color="rgba(255,255,255,0.5)" />
+                  <View className="flex-row items-center justify-center p-6 bg-white/10 rounded-lg border border-dashed border-white/20">
+                    <Text className="text-white/70 font-medium text-[12px]">No performance data available</Text>
                   </View>
                 </View>
               </View>
               
-              <Pressable className="w-full py-3 bg-white rounded-lg items-center justify-center mt-6">
-                <Text className="font-bold text-[12px] text-primary">View All Members</Text>
+              <Pressable className="w-full py-3 bg-white/5 rounded-lg items-center justify-center mt-6 border border-white/10">
+                <Text className="font-bold text-[12px] text-white/50">View All Members</Text>
               </Pressable>
             </View>
           </View>

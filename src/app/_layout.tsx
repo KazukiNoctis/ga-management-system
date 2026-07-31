@@ -13,15 +13,24 @@ function RootLayoutNav() {
     if (loading) return;
 
     const inAuthGroup = segments[0] === '(auth)';
+    const inAdminGroup = segments[0] === '(admin)';
 
     if (!session) {
       if (!inAuthGroup) {
         router.replace('/(auth)/login');
       }
     } else {
+      const isAdmin = profile?.role === 'admin';
+      
+      // If trying to access admin pages but not an admin, redirect to staff
+      if (inAdminGroup && !isAdmin) {
+        router.replace('/(staff)');
+        return;
+      }
+      
       // If user is authenticated and in the auth group or root, redirect them to the correct dashboard
       if (inAuthGroup || !segments.length) {
-        if (profile?.role === 'admin') {
+        if (isAdmin) {
           router.replace('/(admin)');
         } else {
           router.replace('/(staff)');

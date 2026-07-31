@@ -4,13 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 export default function ReportAnalytics() {
   // Mock data for the activity feed
-  const activityFeed = [
-    { id: 1, name: 'Sarah K. Jenkins', initials: 'SK', dept: 'Strategic Procurement', time: 'Oct 24, 2023 · 14:22', lang: 'English (US)', status: 'COMPLETED', color: 'bg-emerald-100 text-emerald-800' },
-    { id: 2, name: 'Marcus Webb', initials: 'MW', dept: 'Facilities Management', time: 'Oct 24, 2023 · 13:58', lang: 'German', status: 'COMPLETED', color: 'bg-emerald-100 text-emerald-800' },
-    { id: 3, name: 'Takahiro Lee', initials: 'TL', dept: 'Asia-Pac Logistics', time: 'Oct 24, 2023 · 12:45', lang: 'Japanese', status: 'IN PROGRESS', color: 'bg-blue-100 text-blue-800' },
-    { id: 4, name: 'Elena Cuoco', initials: 'EC', dept: 'Executive Support', time: 'Oct 24, 2023 · 11:30', lang: 'English (UK)', status: 'COMPLETED', color: 'bg-emerald-100 text-emerald-800' },
-    { id: 5, name: 'John Doe', initials: 'JD', dept: 'Internal Audit', time: 'Oct 24, 2023 · 10:15', lang: 'French', status: 'PENDING', color: 'bg-amber-100 text-amber-800' },
-  ];
+  const activityFeed: any[] = [];
 
   return (
     <ScrollView className="flex-1 bg-background">
@@ -48,16 +42,15 @@ export default function ReportAnalytics() {
               <View className="p-2 bg-primary-container rounded-lg">
                 <MaterialIcons name="auto-awesome" size={20} color="#ffffff" />
               </View>
-              <View className="bg-emerald-50 px-2 py-1 rounded flex-row items-center gap-1">
-                <MaterialIcons name="trending-up" size={12} color="#059669" />
-                <Text className="text-[10px] font-bold text-emerald-600">12.5%</Text>
+              <View className="bg-surface-container px-2 py-1 rounded flex-row items-center gap-1">
+                <Text className="text-[10px] font-bold text-secondary">No Data</Text>
               </View>
             </View>
             <View>
               <Text className="text-[12px] text-secondary uppercase tracking-wider">Total AI Refinements</Text>
-              <Text className="text-[24px] font-bold text-primary mt-1">2,482</Text>
+              <Text className="text-[24px] font-bold text-primary mt-1">0</Text>
               <View className="mt-4 h-1 w-full bg-surface-container-low rounded-full overflow-hidden">
-                <View className="h-full bg-primary rounded-full" style={{ width: '75%' }} />
+                <View className="h-full bg-primary rounded-full" style={{ width: '0%' }} />
               </View>
             </View>
           </View>
@@ -67,15 +60,14 @@ export default function ReportAnalytics() {
               <View className="p-2 bg-secondary-container rounded-lg">
                 <MaterialIcons name="translate" size={20} color="#0b1c30" />
               </View>
-              <View className="bg-emerald-50 px-2 py-1 rounded flex-row items-center gap-1">
-                <MaterialIcons name="trending-up" size={12} color="#059669" />
-                <Text className="text-[10px] font-bold text-emerald-600">8.2%</Text>
+              <View className="bg-surface-container px-2 py-1 rounded flex-row items-center gap-1">
+                <Text className="text-[10px] font-bold text-secondary">No Data</Text>
               </View>
             </View>
             <View>
               <Text className="text-[12px] text-secondary uppercase tracking-wider">Languages Supported</Text>
-              <Text className="text-[24px] font-bold text-primary mt-1">14</Text>
-              <Text className="text-[12px] text-secondary mt-2">Active in 8 regions</Text>
+              <Text className="text-[24px] font-bold text-primary mt-1">0</Text>
+              <Text className="text-[12px] text-secondary mt-2">Active in 0 regions</Text>
             </View>
           </View>
 
@@ -84,15 +76,14 @@ export default function ReportAnalytics() {
               <View className="p-2 bg-[#004a31] rounded-lg">
                 <MaterialIcons name="timer" size={20} color="#6ffbbe" />
               </View>
-              <View className="bg-red-50 px-2 py-1 rounded flex-row items-center gap-1">
-                <MaterialIcons name="trending-down" size={12} color="#dc2626" />
-                <Text className="text-[10px] font-bold text-red-600">0.4s</Text>
+              <View className="bg-surface-container px-2 py-1 rounded flex-row items-center gap-1">
+                <Text className="text-[10px] font-bold text-secondary">No Data</Text>
               </View>
             </View>
             <View>
               <Text className="text-[12px] text-secondary uppercase tracking-wider">Avg. Processing Time</Text>
-              <Text className="text-[24px] font-bold text-primary mt-1">1.2s</Text>
-              <Text className="text-[12px] text-secondary mt-2">Optimized since last update</Text>
+              <Text className="text-[24px] font-bold text-primary mt-1">0.0s</Text>
+              <Text className="text-[12px] text-secondary mt-2">Insufficient data</Text>
             </View>
           </View>
 
@@ -102,14 +93,14 @@ export default function ReportAnalytics() {
                 <MaterialIcons name="token" size={20} color="#444651" />
               </View>
               <View className="bg-surface-container px-2 py-1 rounded flex-row items-center gap-1">
-                <Text className="text-[10px] font-bold text-secondary">Stable</Text>
+                <Text className="text-[10px] font-bold text-secondary">No Data</Text>
               </View>
             </View>
             <View>
               <Text className="text-[12px] text-secondary uppercase tracking-wider">Token Efficiency</Text>
-              <Text className="text-[24px] font-bold text-primary mt-1">94.2%</Text>
+              <Text className="text-[24px] font-bold text-primary mt-1">0%</Text>
               <View className="mt-4 h-1 w-full bg-surface-container-low rounded-full overflow-hidden">
-                <View className="h-full bg-[#27c38a] rounded-full" style={{ width: '94%' }} />
+                <View className="h-full bg-[#27c38a] rounded-full" style={{ width: '0%' }} />
               </View>
             </View>
           </View>
@@ -136,13 +127,13 @@ export default function ReportAnalytics() {
             
             <View className="flex-1 flex-row items-end justify-between gap-4 px-4 pb-6">
               {[
-                { day: 'MON', height: '40%', val: 320, color: 'bg-primary-container/20' },
-                { day: 'TUE', height: '55%', val: 450, color: 'bg-primary-container/20' },
-                { day: 'WED', height: '90%', val: 710, color: 'bg-primary' },
-                { day: 'THU', height: '70%', val: 560, color: 'bg-primary-container/20' },
-                { day: 'FRI', height: '65%', val: 520, color: 'bg-primary-container/20' },
-                { day: 'SAT', height: '30%', val: 240, color: 'bg-surface-container-high' },
-                { day: 'SUN', height: '25%', val: 200, color: 'bg-surface-container-high' }
+                { day: 'MON', height: '0%', val: 0, color: 'bg-primary-container/20' },
+                { day: 'TUE', height: '0%', val: 0, color: 'bg-primary-container/20' },
+                { day: 'WED', height: '0%', val: 0, color: 'bg-primary' },
+                { day: 'THU', height: '0%', val: 0, color: 'bg-primary-container/20' },
+                { day: 'FRI', height: '0%', val: 0, color: 'bg-primary-container/20' },
+                { day: 'SAT', height: '0%', val: 0, color: 'bg-surface-container-high' },
+                { day: 'SUN', height: '0%', val: 0, color: 'bg-surface-container-high' }
               ].map((item, i) => (
                 <View key={i} className="flex-1 items-center">
                   <View className={`w-full rounded-t-lg ${item.color}`} style={{ height: item.height }} />
@@ -175,44 +166,44 @@ export default function ReportAnalytics() {
                 <View>
                   <View className="flex-row justify-between mb-2">
                     <Text className="font-bold text-[12px] text-on-surface">English (US/UK)</Text>
-                    <Text className="text-[12px] text-secondary">64%</Text>
+                    <Text className="text-[12px] text-secondary">0%</Text>
                   </View>
                   <View className="h-2 w-full bg-surface-container-low rounded-full">
-                    <View className="h-full bg-primary rounded-full" style={{ width: '64%' }} />
+                    <View className="h-full bg-primary rounded-full" style={{ width: '0%' }} />
                   </View>
                 </View>
                 <View>
                   <View className="flex-row justify-between mb-2">
                     <Text className="font-bold text-[12px] text-on-surface">Japanese</Text>
-                    <Text className="text-[12px] text-secondary">21%</Text>
+                    <Text className="text-[12px] text-secondary">0%</Text>
                   </View>
                   <View className="h-2 w-full bg-surface-container-low rounded-full">
-                    <View className="h-full bg-[#27c38a] rounded-full" style={{ width: '21%' }} />
+                    <View className="h-full bg-[#27c38a] rounded-full" style={{ width: '0%' }} />
                   </View>
                 </View>
                 <View>
                   <View className="flex-row justify-between mb-2">
                     <Text className="font-bold text-[12px] text-on-surface">German</Text>
-                    <Text className="text-[12px] text-secondary">9%</Text>
+                    <Text className="text-[12px] text-secondary">0%</Text>
                   </View>
                   <View className="h-2 w-full bg-surface-container-low rounded-full">
-                    <View className="h-full bg-[#505f76] rounded-full" style={{ width: '9%' }} />
+                    <View className="h-full bg-[#505f76] rounded-full" style={{ width: '0%' }} />
                   </View>
                 </View>
                 <View>
                   <View className="flex-row justify-between mb-2">
                     <Text className="font-bold text-[12px] text-on-surface">Mandarin</Text>
-                    <Text className="text-[12px] text-secondary">6%</Text>
+                    <Text className="text-[12px] text-secondary">0%</Text>
                   </View>
                   <View className="h-2 w-full bg-surface-container-low rounded-full">
-                    <View className="h-full bg-secondary-container rounded-full" style={{ width: '6%' }} />
+                    <View className="h-full bg-secondary-container rounded-full" style={{ width: '0%' }} />
                   </View>
                 </View>
               </View>
             </View>
             
             <View className="mt-8 p-4 bg-primary/5 rounded-lg border border-primary/10">
-              <Text className="text-[12px] text-primary italic">"Refinement quality scores remain high across all top-4 languages, averaging 4.8/5.0 stars from user feedback."</Text>
+              <Text className="text-[12px] text-primary italic">"Insufficient data to aggregate refinement scores for this period."</Text>
             </View>
           </View>
         </View>
@@ -243,40 +234,46 @@ export default function ReportAnalytics() {
           </View>
 
           {/* Table Rows */}
-          {activityFeed.map((row, i) => (
-            <View key={row.id} className={`flex-row items-center px-6 py-4 hover:bg-surface-container-low ${i !== activityFeed.length - 1 ? 'border-b border-outline-variant' : ''}`}>
-              <View className="flex-[2] flex-row items-center gap-3 pr-4">
-                <View className="w-8 h-8 rounded-full bg-secondary-container items-center justify-center">
-                  <Text className="text-[10px] font-bold text-on-secondary-container">{row.initials}</Text>
-                </View>
-                <Text className="text-[14px] font-bold text-on-surface">{row.name}</Text>
-              </View>
-              
-              <View className="flex-[2] pr-4">
-                <Text className="text-[14px] text-secondary">{row.dept}</Text>
-              </View>
-              
-              <View className="flex-[2] pr-4">
-                <Text className="text-[14px] text-on-surface font-medium">{row.time}</Text>
-              </View>
-              
-              <View className="flex-[1.5] pr-4">
-                <View className="self-start px-2 py-1 bg-surface-container-high rounded">
-                  <Text className="text-[11px] font-bold text-secondary">{row.lang}</Text>
-                </View>
-              </View>
-              
-              <View className="flex-[1] items-end">
-                <View className={`px-3 py-1 rounded-full ${row.color}`}>
-                  <Text className="text-[10px] font-bold uppercase">{row.status}</Text>
-                </View>
-              </View>
+          {activityFeed.length === 0 ? (
+            <View className="py-8 items-center justify-center border-b border-outline-variant">
+              <Text className="text-secondary text-[14px]">No recent activity found</Text>
             </View>
-          ))}
+          ) : (
+            activityFeed.map((row, i) => (
+              <View key={row.id} className={`flex-row items-center px-6 py-4 hover:bg-surface-container-low ${i !== activityFeed.length - 1 ? 'border-b border-outline-variant' : ''}`}>
+                <View className="flex-[2] flex-row items-center gap-3 pr-4">
+                  <View className="w-8 h-8 rounded-full bg-secondary-container items-center justify-center">
+                    <Text className="text-[10px] font-bold text-on-secondary-container">{row.initials}</Text>
+                  </View>
+                  <Text className="text-[14px] font-bold text-on-surface">{row.name}</Text>
+                </View>
+                
+                <View className="flex-[2] pr-4">
+                  <Text className="text-[14px] text-secondary">{row.dept}</Text>
+                </View>
+                
+                <View className="flex-[2] pr-4">
+                  <Text className="text-[14px] text-on-surface font-medium">{row.time}</Text>
+                </View>
+                
+                <View className="flex-[1.5] pr-4">
+                  <View className="self-start px-2 py-1 bg-surface-container-high rounded">
+                    <Text className="text-[11px] font-bold text-secondary">{row.lang}</Text>
+                  </View>
+                </View>
+                
+                <View className="flex-[1] items-end">
+                  <View className={`px-3 py-1 rounded-full ${row.color}`}>
+                    <Text className="text-[10px] font-bold uppercase">{row.status}</Text>
+                  </View>
+                </View>
+              </View>
+            ))
+          )}
 
           {/* Footer */}
           <View className="px-6 py-4 bg-surface-container-low/30 border-t border-outline-variant flex-row items-center justify-between">
-            <Text className="text-[12px] text-secondary">Showing 5 of 248 active refinement tasks</Text>
+            <Text className="text-[12px] text-secondary">Showing {activityFeed.length} active refinement tasks</Text>
             <View className="flex-row gap-2">
               <Pressable className="w-8 h-8 items-center justify-center border border-outline-variant rounded hover:bg-surface">
                 <MaterialIcons name="chevron-left" size={16} color="#505f76" />
