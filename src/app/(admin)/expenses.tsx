@@ -3,7 +3,7 @@ import { View, Text, Pressable, ScrollView, ActivityIndicator } from 'react-nati
 import { supabase } from '@/lib/supabase';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Expense } from '@/types';
-import { format } from 'date-fns';
+
 
 type ExpenseWithUser = Expense & {
   profiles: { full_name: string } | null;
@@ -178,7 +178,7 @@ export default function ExpenseTracking() {
                 </View>
 
                 <View className="flex-[1] justify-center pr-4">
-                  <Text className="text-[14px] text-on-surface">{format(new Date(expense.created_at), 'MMM dd, yyyy')}</Text>
+                  <Text className="text-[14px] text-on-surface">{new Date(expense.created_at).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}</Text>
                 </View>
 
                 <View className="flex-[1] justify-center px-4">

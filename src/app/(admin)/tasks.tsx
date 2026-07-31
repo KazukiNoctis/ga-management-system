@@ -3,7 +3,7 @@ import { View, Text, Pressable, ScrollView, ActivityIndicator } from 'react-nati
 import { supabase } from '@/lib/supabase';
 import { MaterialIcons } from '@expo/vector-icons';
 import { CheckingForm } from '@/types';
-import { format } from 'date-fns';
+
 
 type TaskWithUser = CheckingForm & {
   profiles: { full_name: string } | null;
@@ -183,7 +183,7 @@ export default function TaskOversight() {
                   {/* Timestamp */}
                   <View className="flex-[1] justify-center">
                     <Text className="text-[12px] text-secondary">
-                      {format(new Date(task.created_at), 'MMM dd, hh:mm a')}
+                      {new Date(task.created_at).toLocaleString('en-US', { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: true })}
                     </Text>
                   </View>
                 </View>
