@@ -1,6 +1,7 @@
 import { Tabs } from 'expo-router';
 import { View, Text, Pressable } from 'react-native';
 import { useAuth } from '@/lib/auth-context';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function StaffLayout() {
   const { signOut } = useAuth();
@@ -22,8 +23,8 @@ export default function StaffLayout() {
         tabBarActiveTintColor: '#1e3a8a', // text-primary-container
         tabBarInactiveTintColor: '#757682', // text-outline
         headerRight: () => (
-          <Pressable onPress={signOut} className="mr-4 px-3 py-1 bg-error-container rounded-full border border-error">
-            <Text className="text-error font-medium">Sign Out</Text>
+          <Pressable onPress={signOut} className="mr-4 w-10 h-10 rounded-full items-center justify-center bg-surface-container-highest">
+            <MaterialIcons name="logout" size={20} color="#ba1a1a" />
           </Pressable>
         ),
       }}
@@ -32,35 +33,35 @@ export default function StaffLayout() {
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 20 }}>🏠</Text>,
+          tabBarIcon: ({ color }) => <MaterialIcons name="home" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
         name="checking-form"
         options={{
           title: 'Check',
-          tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 20 }}>📋</Text>,
+          tabBarIcon: ({ color }) => <MaterialIcons name="fact-check" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
         name="add-expense"
         options={{
           title: 'Add Rp',
-          tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 20 }}>💰</Text>,
+          tabBarIcon: ({ color }) => <MaterialIcons name="add-card" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
         name="expenses"
         options={{
           title: 'Expenses',
-          tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 20 }}>📊</Text>,
+          tabBarIcon: ({ color }) => <MaterialIcons name="receipt-long" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
         name="report"
         options={{
           title: 'AI Refiner',
-          tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 20 }}>✨</Text>,
+          tabBarIcon: ({ color }) => <MaterialIcons name="auto-awesome" size={24} color={color} />,
         }}
       />
     </Tabs>

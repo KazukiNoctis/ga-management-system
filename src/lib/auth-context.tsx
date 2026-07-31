@@ -8,7 +8,7 @@ type AuthContextType = {
   profile: Profile | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string, fullName: string, branchId: string) => Promise<void>;
+  signUp: (email: string, password: string, fullName: string) => Promise<void>;
   signOut: () => Promise<void>;
 };
 
@@ -62,7 +62,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     if (error) throw error;
   };
 
-  const signUp = async (email: string, password: string, fullName: string, branchId: string) => {
+  const signUp = async (email: string, password: string, fullName: string) => {
     const { data: { user }, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
@@ -74,7 +74,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
       const { error: profileError } = await supabase.from('profiles').insert({
         id: user.id,
         full_name: fullName,
-        branch_id: branchId,
         role: 'staff',
       });
 

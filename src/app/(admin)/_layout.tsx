@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Text } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function AdminLayout() {
   return (
@@ -21,28 +21,35 @@ export default function AdminLayout() {
         name="index"
         options={{
           title: 'Dashboard',
-          tabBarIcon: ({ color }) => <Text style={{ fontSize: 24, color }}>📊</Text>,
+          tabBarIcon: ({ color }) => <MaterialIcons name="dashboard" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
         name="branches"
         options={{
           title: 'Branches',
-          tabBarIcon: ({ color }) => <Text style={{ fontSize: 24, color }}>🏢</Text>,
+          tabBarIcon: ({ color }) => <MaterialIcons name="business" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
         name="expenses"
         options={{
           title: 'Expenses',
-          tabBarIcon: ({ color }) => <Text style={{ fontSize: 24, color }}>💳</Text>,
+          tabBarIcon: ({ color }) => <MaterialIcons name="payments" size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="members"
+        options={{
+          title: 'Staff',
+          tabBarIcon: ({ color }) => <MaterialIcons name="people" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
         name="report"
         options={{
           title: 'AI Logs',
-          tabBarIcon: ({ color }) => <Text style={{ fontSize: 24, color }}>🤖</Text>,
+          tabBarIcon: ({ color }) => <MaterialIcons name="smart-toy" size={24} color={color} />,
         }}
       />
     </Tabs>

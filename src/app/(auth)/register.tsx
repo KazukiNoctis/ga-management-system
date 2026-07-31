@@ -3,6 +3,7 @@ import { View, Text, TextInput, Pressable, KeyboardAvoidingView, Platform, Activ
 import { Link, router } from 'expo-router';
 import { useAuth } from '@/lib/auth-context';
 import { supabase } from '@/lib/supabase';
+import { MaterialIcons } from '@expo/vector-icons';
 
 type Branch = {
   id: string;
@@ -13,37 +14,25 @@ export default function RegisterScreen() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [branches, setBranches] = useState<Branch[]>([]);
-  const [selectedBranch, setSelectedBranch] = useState<string>('');
+  const [showPassword, setShowPassword] = useState(false);
+  
   const [loading, setLoading] = useState(false);
-  const [fetchingBranches, setFetchingBranches] = useState(true);
+  
+  const [isFocusedName, setIsFocusedName] = useState(false);
+  const [isFocusedEmail, setIsFocusedEmail] = useState(false);
+  const [isFocusedPassword, setIsFocusedPassword] = useState(false);
+  
   const { signUp } = useAuth();
 
-  useEffect(() => {
-    fetchBranches();
-  }, []);
-
-  const fetchBranches = async () => {
-    try {
-      const { data, error } = await supabase.from('branches').select('id, name');
-      if (error) throw error;
-      if (data) setBranches(data);
-    } catch (error) {
-      console.error('Error fetching branches:', error);
-    } finally {
-      setFetchingBranches(false);
-    }
-  };
-
   const handleRegister = async () => {
-    if (!fullName || !email || !password || !selectedBranch) {
-      Alert.alert('Error', 'Please fill in all fields and select a branch');
+    if (!fullName || !email || !password) {
+      Alert.alert('Error', 'Please fill in all fields');
       return;
     }
     
     setLoading(true);
     try {
-      await signUp(email, password, fullName, selectedBranch);
+      await signUp(email, password, fullName);
       
       Alert.alert('Success', 'Account created successfully', [
         { text: 'OK', onPress: () => router.replace('/(auth)/login') }
@@ -60,96 +49,129 @@ export default function RegisterScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       className="flex-1 bg-background"
     >
-      <ScrollView contentContainerClassName="flex-grow px-6 py-12 justify-center">
-        <View className="mb-8 items-center">
-          <Text className="text-3xl font-bold text-primary mb-2">Create Account</Text>
-          <Text className="text-on-surface-variant text-base">Join the GA Management system</Text>
-        </View>
-
-        <View className="space-y-4 mb-6">
-          <View>
-            <Text className="text-on-surface font-semibold mb-2 ml-1">Full Name</Text>
-            <TextInput
-              className="w-full bg-surface-container-lowest text-on-surface rounded-lg px-4 py-4 border border-outline-variant focus:border-primary-container"
-              placeholder="Enter your full name"
-              placeholderTextColor="#757682"
-              value={fullName}
-              onChangeText={setFullName}
-            />
-          </View>
-
-          <View className="mt-4">
-            <Text className="text-on-surface font-semibold mb-2 ml-1">Email</Text>
-            <TextInput
-              className="w-full bg-surface-container-lowest text-on-surface rounded-lg px-4 py-4 border border-outline-variant focus:border-primary-container"
-              placeholder="Enter your email"
-              placeholderTextColor="#757682"
-              value={email}
-              onChangeText={setEmail}
-              autoCapitalize="none"
-              keyboardType="email-address"
-            />
-          </View>
-
-          <View className="mt-4">
-            <Text className="text-on-surface font-semibold mb-2 ml-1">Password</Text>
-            <TextInput
-              className="w-full bg-surface-container-lowest text-on-surface rounded-lg px-4 py-4 border border-outline-variant focus:border-primary-container"
-              placeholder="Create a password"
-              placeholderTextColor="#757682"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-            />
-          </View>
+      <ScrollView contentContainerClassName="flex-grow justify-center p-4 md:p-8">
+        <View className="w-full max-w-[480px] mx-auto">
           
-          <View className="mt-4">
-            <Text className="text-on-surface font-semibold mb-2 ml-1">Select Branch</Text>
-            {fetchingBranches ? (
-              <ActivityIndicator size="small" color="#1e3a8a" className="py-4" />
-            ) : (
-              <View className="flex-row flex-wrap gap-2">
-                {branches.map((branch) => (
-                  <Pressable
-                    key={branch.id}
-                    onPress={() => setSelectedBranch(branch.id)}
-                    className={`px-4 py-3 rounded-lg border ${
-                      selectedBranch === branch.id 
-                        ? 'bg-primary-container/10 border-primary-container' 
-                        : 'bg-surface-container-lowest border-outline-variant'
-                    }`}
-                  >
-                    <Text className={`${
-                      selectedBranch === branch.id ? 'text-primary font-semibold' : 'text-on-surface'
-                    }`}>
-                      {branch.name}
-                    </Text>
-                  </Pressable>
-                ))}
+          <View className="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 md:p-8 shadow-sm">
+            
+            {/* Header Section */}
+            <View className="items-center mb-6">
+              <View className="w-12 h-12 bg-surface-container-low rounded-lg items-center justify-center mb-4 border border-outline-variant">
+                <MaterialIcons name="business" size={28} color="#00236f" />
               </View>
-            )}
+              <Text className="text-[32px] leading-[40px] font-bold text-on-surface mb-2 tracking-tight">Join GA Team</Text>
+              <Text className="text-sm text-on-surface-variant text-center">Create your account to manage facilities, assets, and procurement.</Text>
+            </View>
+
+            <View className="flex-col gap-4">
+              
+              {/* Full Name Field */}
+              <View className="flex-col gap-1">
+                <Text className="text-xs font-semibold text-on-surface mb-1">Full Name</Text>
+                <View className="relative justify-center">
+                  <View className="absolute left-3 z-10">
+                    <MaterialIcons name="person" size={20} color="#757682" />
+                  </View>
+                  <TextInput
+                    className={`w-full pl-10 pr-3 py-3 rounded-lg bg-surface-container-lowest text-on-surface text-sm border ${isFocusedName ? 'border-primary' : 'border-outline-variant'}`}
+                    placeholder="e.g. Jane Doe"
+                    placeholderTextColor="#757682"
+                    value={fullName}
+                    onChangeText={setFullName}
+                    onFocus={() => setIsFocusedName(true)}
+                    onBlur={() => setIsFocusedName(false)}
+                  />
+                </View>
+              </View>
+
+              {/* Company Email Field */}
+              <View className="flex-col gap-1">
+                <Text className="text-xs font-semibold text-on-surface mb-1">Company Email</Text>
+                <View className="relative justify-center">
+                  <View className="absolute left-3 z-10">
+                    <MaterialIcons name="mail" size={20} color="#757682" />
+                  </View>
+                  <TextInput
+                    className={`w-full pl-10 pr-3 py-3 rounded-lg bg-surface-container-lowest text-on-surface text-sm border ${isFocusedEmail ? 'border-primary' : 'border-outline-variant'}`}
+                    placeholder="jane.doe@company.com"
+                    placeholderTextColor="#757682"
+                    value={email}
+                    onChangeText={setEmail}
+                    autoCapitalize="none"
+                    keyboardType="email-address"
+                    onFocus={() => setIsFocusedEmail(true)}
+                    onBlur={() => setIsFocusedEmail(false)}
+                  />
+                </View>
+              </View>
+
+              {/* Password Field */}
+              <View className="flex-col gap-1">
+                <Text className="text-xs font-semibold text-on-surface mb-1">Password</Text>
+                <View className="relative justify-center">
+                  <View className="absolute left-3 z-10">
+                    <MaterialIcons name="lock" size={20} color="#757682" />
+                  </View>
+                  <TextInput
+                    className={`w-full pl-10 pr-10 py-3 rounded-lg bg-surface-container-lowest text-on-surface text-sm border ${isFocusedPassword ? 'border-primary' : 'border-outline-variant'}`}
+                    placeholder="••••••••"
+                    placeholderTextColor="#757682"
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry={!showPassword}
+                    onFocus={() => setIsFocusedPassword(true)}
+                    onBlur={() => setIsFocusedPassword(false)}
+                  />
+                  <Pressable 
+                    className="absolute right-3 z-10"
+                    onPress={() => setShowPassword(!showPassword)}
+                  >
+                    <MaterialIcons name={showPassword ? "visibility" : "visibility-off"} size={20} color="#757682" />
+                  </Pressable>
+                </View>
+                <Text className="text-[12px] text-on-surface-variant mt-1">Must be at least 8 characters.</Text>
+              </View>
+              
+              {/* Primary Action */}
+              <View className="pt-4">
+                <Pressable
+                  className={`w-full bg-primary rounded-lg py-3 flex-row items-center justify-center gap-2 ${loading ? 'opacity-70' : 'opacity-100 active:opacity-90'}`}
+                  onPress={handleRegister}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <ActivityIndicator color="#ffffff" />
+                  ) : (
+                    <>
+                      <Text className="text-white font-semibold text-sm">Register</Text>
+                      <MaterialIcons name="arrow-forward" size={18} color="#ffffff" />
+                    </>
+                  )}
+                </Pressable>
+              </View>
+              
+              {/* Secondary Action */}
+              <View className="mt-4 items-center">
+                <View className="flex-row items-center">
+                  <Text className="text-sm text-on-surface-variant">Already have an account? </Text>
+                  <Link href="/(auth)/login" asChild>
+                    <Pressable>
+                      <Text className="text-sm font-semibold text-primary underline">Login</Text>
+                    </Pressable>
+                  </Link>
+                </View>
+              </View>
+
+            </View>
           </View>
-        </View>
 
-        <Pressable
-          className={`w-full bg-primary-container rounded-lg py-4 items-center mt-4 ${loading ? 'opacity-70' : 'opacity-100'}`}
-          onPress={handleRegister}
-          disabled={loading}
-        >
-          {loading ? (
-            <ActivityIndicator color="#ffffff" />
-          ) : (
-            <Text className="text-white font-bold text-lg">Create Account</Text>
-          )}
-        </Pressable>
+          {/* Footer Info */}
+          <View className="items-center mt-6 pb-8">
+            <Text className="text-xs text-outline text-center">
+              By registering, you agree to the <Text className="underline">Terms of Service</Text> and <Text className="underline">Privacy Policy</Text>.
+            </Text>
+          </View>
 
-        <View className="flex-row justify-center mt-8 pb-8">
-          <Text className="text-on-surface-variant">Already have an account? </Text>
-          <Link href="/(auth)/login" asChild>
-            <Pressable>
-              <Text className="text-primary font-semibold">Sign In</Text>
-            </Pressable>
-          </Link>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

@@ -8,7 +8,7 @@ export interface Branch {
 export interface Profile {
   id: string;
   full_name: string;
-  branch_id: string;
+  branch_id?: string | null;
   role: 'staff' | 'admin';
   created_at?: string;
 }
