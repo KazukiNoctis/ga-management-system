@@ -70,6 +70,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
       options: {
         data: {
           full_name: fullName,
+          name: fullName,
+          display_name: fullName,
         },
         emailRedirectTo: Linking.createURL('/'),
       },
