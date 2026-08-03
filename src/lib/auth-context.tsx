@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState, PropsWithChildren } from 'react';
 import { Session } from '@supabase/supabase-js';
+import * as Linking from 'expo-linking';
 import { supabase } from './supabase';
 import { Profile } from '../types';
 
@@ -63,22 +64,18 @@ export function AuthProvider({ children }: PropsWithChildren) {
   };
 
   const signUp = async (email: string, password: string, fullName: string) => {
-    const { data: { user }, error: signUpError } = await supabase.auth.signUp({
+    const { error: signUpError } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          full_name: fullName,
+        },
+        emailRedirectTo: Linking.createURL('/'),
+      },
     });
 
     if (signUpError) throw signUpError;
-
-    if (user) {
-      const { error: profileError } = await supabase.from('profiles').insert({
-        id: user.id,
-        full_name: fullName,
-        role: 'staff',
-      });
-
-      if (profileError) throw profileError;
-    }
   };
 
   const signOut = async () => {
