@@ -13,7 +13,7 @@ function RootLayoutNav() {
     if (loading) return;
 
     const inAuthGroup = segments[0] === '(auth)';
-    const inAdminGroup = segments[0] === '(admin)';
+    const inAdminGroup = segments[0] === 'admin';
     const inPublicGroup = segments[0] === '(public)';
 
     if (!session) {
@@ -32,7 +32,7 @@ function RootLayoutNav() {
       // If user is authenticated and in the auth group, public group, or root, redirect them to the correct dashboard
       if (inAuthGroup || inPublicGroup || !segments.length) {
         if (isAdmin) {
-          router.replace('/(admin)');
+          router.replace('/admin');
         } else {
           router.replace('/(staff)');
         }
@@ -53,7 +53,7 @@ function RootLayoutNav() {
       <Stack.Screen name="(public)" />
       <Stack.Screen name="(auth)" />
       <Stack.Screen name="(staff)" />
-      <Stack.Screen name="(admin)" />
+      <Stack.Screen name="admin" />
     </Stack>
   );
 }

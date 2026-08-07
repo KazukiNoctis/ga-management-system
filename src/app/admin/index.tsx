@@ -171,7 +171,7 @@ export default function MemberManagement() {
                 <View className="flex-[1] flex-row items-center justify-end gap-2">
                   <Pressable 
                     className="p-2 rounded-lg hover:bg-primary/10"
-                    onPress={() => router.push(`/(admin)/member/${member.id}` as any)}
+                    onPress={() => router.push(`/admin/member/${member.id}` as any)}
                   >
                     <MaterialIcons name="edit" size={20} color="#00236f" />
                   </Pressable>

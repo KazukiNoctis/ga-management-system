@@ -9,10 +9,10 @@ export default function AdminLayout() {
   const pathname = usePathname();
 
   const navItems = [
-    { name: 'Member Management', icon: 'group', path: '/(admin)' },
-    { name: 'Task Oversight', icon: 'assignment', path: '/(admin)/tasks' },
-    { name: 'Expense Tracking', icon: 'payments', path: '/(admin)/expenses' },
-    { name: 'AI Usage Analytics', icon: 'analytics', path: '/(admin)/report' },
+    { name: 'Member Management', icon: 'group', path: '/admin' },
+    { name: 'Task Oversight', icon: 'assignment', path: '/admin/tasks' },
+    { name: 'Expense Tracking', icon: 'payments', path: '/admin/expenses' },
+    { name: 'AI Usage Analytics', icon: 'analytics', path: '/admin/report' },
   ];
 
   return (
