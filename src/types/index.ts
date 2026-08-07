@@ -1,14 +1,6 @@
-export interface Branch {
-  id: string;
-  name: string;
-  location: string;
-  created_at: string;
-}
-
 export interface Profile {
   id: string;
   full_name: string;
-  branch_id?: string | null;
   role: 'staff' | 'admin';
   created_at?: string;
 }
@@ -16,7 +8,6 @@ export interface Profile {
 export interface CheckingForm {
   id: string;
   user_id: string;
-  branch_id: string;
   title: string;
   image_url: string | null;
   note: string;
@@ -26,7 +17,6 @@ export interface CheckingForm {
 export interface Expense {
   id: string;
   user_id: string;
-  branch_id: string;
   title: string;
   amount: number;
   image_url: string | null;
@@ -34,14 +24,23 @@ export interface Expense {
   created_at: string;
 }
 
+export interface Task {
+  id: string;
+  title: string;
+  description: string | null;
+  priority: 'Low' | 'Medium' | 'Critical';
+  status: 'Pending' | 'Finished' | 'Aborted';
+  image_url: string | null;
+  submitter_name: string;
+  submitter_division: string;
+  user_id: string | null;
+  resolution_note: string | null;
+  created_at: string;
+}
+
 export interface Database {
   public: {
     Tables: {
-      branches: {
-        Row: Branch;
-        Insert: Omit<Branch, 'id' | 'created_at'>;
-        Update: Partial<Omit<Branch, 'id' | 'created_at'>>;
-      };
       profiles: {
         Row: Profile;
         Insert: Profile;
@@ -56,6 +55,11 @@ export interface Database {
         Row: Expense;
         Insert: Omit<Expense, 'id' | 'created_at'>;
         Update: Partial<Omit<Expense, 'id' | 'created_at'>>;
+      };
+      tasks: {
+        Row: Task;
+        Insert: Omit<Task, 'id' | 'created_at'>;
+        Update: Partial<Omit<Task, 'id' | 'created_at'>>;
       };
     };
   };

@@ -11,6 +11,7 @@ type AuthContextType = {
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string, fullName: string) => Promise<void>;
   signOut: () => Promise<void>;
+  refreshProfile: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -29,8 +30,10 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
-      if (session) fetchProfile(session.user.id);
-      else {
+      if (session) {
+        setLoading(true);
+        fetchProfile(session.user.id);
+      } else {
         setProfile(null);
         setLoading(false);
       }
@@ -85,8 +88,14 @@ export function AuthProvider({ children }: PropsWithChildren) {
     if (error) throw error;
   };
 
+  const refreshProfile = async () => {
+    if (session?.user?.id) {
+      await fetchProfile(session.user.id);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ session, profile, loading, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{ session, profile, loading, signIn, signUp, signOut, refreshProfile }}>
       {children}
     </AuthContext.Provider>
   );

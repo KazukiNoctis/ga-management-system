@@ -14,7 +14,10 @@ export default function StaffReportScreen() {
 
   useEffect(() => {
     const fetchForms = async () => {
-      if (!profile?.branch_id || !profile?.id) return;
+      if (!profile?.branch_id || !profile?.id) {
+        setLoading(false);
+        return;
+      }
       
       try {
         const { data, error } = await supabase

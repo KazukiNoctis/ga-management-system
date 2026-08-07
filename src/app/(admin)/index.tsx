@@ -22,7 +22,6 @@ export default function MemberManagement() {
           id,
           full_name,
           role,
-          branch_id,
           created_at
         `)
         .order('created_at', { ascending: false });
@@ -127,7 +126,6 @@ export default function MemberManagement() {
               <MaterialIcons name="arrow-downward" size={14} color="#505f76" />
             </View>
             <Text className="flex-[1] text-[12px] font-bold text-secondary uppercase tracking-wider px-2">Role</Text>
-            <Text className="flex-[1.5] text-[12px] font-bold text-secondary uppercase tracking-wider px-2">Branch ID</Text>
             <Text className="flex-[1] text-[12px] font-bold text-secondary uppercase tracking-wider text-right">Actions</Text>
           </View>
 
@@ -168,12 +166,6 @@ export default function MemberManagement() {
                       {member.role.toUpperCase()}
                     </Text>
                   </View>
-                </View>
-
-                <View className="flex-[1.5] px-2 justify-center">
-                  <Text className="text-[14px] font-medium text-on-surface">
-                    {member.branch_id || 'Global'}
-                  </Text>
                 </View>
 
                 <View className="flex-[1] flex-row items-center justify-end gap-2">

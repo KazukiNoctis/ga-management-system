@@ -34,8 +34,8 @@ export default function AddExpenseScreen() {
       return;
     }
 
-    if (!profile?.branch_id || !session?.user?.id) {
-      Alert.alert('Error', 'User profile information is missing');
+    if (!session?.user?.id) {
+      Alert.alert('Error', 'You are not logged in. Please sign in and try again.');
       return;
     }
 
@@ -51,7 +51,6 @@ export default function AddExpenseScreen() {
 
       const { error } = await supabase.from('expenses').insert({
         user_id: session.user.id,
-        branch_id: profile.branch_id,
         title: title.trim(),
         amount: parsedAmount,
         description: description.trim() || null,

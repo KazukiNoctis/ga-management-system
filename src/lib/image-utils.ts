@@ -1,6 +1,6 @@
 import * as ImagePicker from 'expo-image-picker';
 import { supabase } from './supabase';
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system/legacy';
 import { decode } from 'base64-arraybuffer';
 
 export async function pickImage(): Promise<string | null> {

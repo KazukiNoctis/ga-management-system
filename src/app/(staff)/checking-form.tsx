@@ -27,8 +27,8 @@ export default function CheckingFormScreen() {
       return;
     }
     
-    if (!profile?.branch_id || !session?.user?.id) {
-      Alert.alert('Error', 'User profile information is missing');
+    if (!session?.user?.id) {
+      Alert.alert('Error', 'You are not logged in. Please sign in and try again.');
       return;
     }
 
@@ -44,7 +44,6 @@ export default function CheckingFormScreen() {
 
       const { error } = await supabase.from('checking_forms').insert({
         user_id: session.user.id,
-        branch_id: profile.branch_id,
         title: title.trim(),
         note: note.trim() || null,
         image_url: uploadedUrl,

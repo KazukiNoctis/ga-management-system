@@ -145,7 +145,6 @@ export default function ExpenseTracking() {
           {/* Table Header */}
           <View className="flex-row bg-surface-container-low/50 px-6 py-4">
             <Text className="flex-[2] text-[12px] font-bold text-secondary uppercase">Item Name</Text>
-            <Text className="flex-[1] text-[12px] font-bold text-secondary uppercase">Branch</Text>
             <Text className="flex-[1] text-[12px] font-bold text-secondary uppercase">Date</Text>
             <Text className="flex-[1] text-[12px] font-bold text-secondary uppercase text-right px-4">Amount</Text>
             <Text className="flex-[1.5] text-[12px] font-bold text-secondary uppercase">Submitter</Text>
@@ -173,10 +172,6 @@ export default function ExpenseTracking() {
                     <Text className="font-bold text-[14px] text-on-surface">{expense.title}</Text>
                     <Text className="text-[12px] text-secondary">Asset ID: {expense.id.substring(0,8)}</Text>
                   </View>
-                </View>
-
-                <View className="flex-[1] justify-center pr-4">
-                  <Text className="text-[14px] text-on-surface">{expense.branch_id}</Text>
                 </View>
 
                 <View className="flex-[1] justify-center pr-4">

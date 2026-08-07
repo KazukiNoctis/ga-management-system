@@ -12,6 +12,7 @@ export default function StaffHome() {
   const [refreshing, setRefreshing] = useState(false);
   const [stats, setStats] = useState({
     checkingCount: 0,
+    checkingMonthCount: 0,
     expensesCount: 0,
     expensesTotal: 0,
   });
@@ -27,6 +28,17 @@ export default function StaffHome() {
         .from('checking_forms')
         .select('*', { count: 'exact', head: true })
         .eq('user_id', session.user.id);
+
+      // Fetch checking forms this month
+      const startOfMonth = new Date();
+      startOfMonth.setDate(1);
+      startOfMonth.setHours(0, 0, 0, 0);
+
+      const { count: checkingMonthCount } = await supabase
+        .from('checking_forms')
+        .select('*', { count: 'exact', head: true })
+        .eq('user_id', session.user.id)
+        .gte('created_at', startOfMonth.toISOString());
 
       // Fetch expenses stats
       const { data: expenses } = await supabase
@@ -46,6 +58,7 @@ export default function StaffHome() {
 
       setStats({
         checkingCount: checkingCount || 0,
+        checkingMonthCount: checkingMonthCount || 0,
         expensesCount: expenses?.length || 0,
         expensesTotal,
       });
@@ -114,41 +127,45 @@ export default function StaffHome() {
           </View>
         ) : (
           <>
-            {/* Quick Stats Bento */}
+            {/* Quick Stats Bento - 2x2 Grid */}
             <View className="flex-row flex-wrap gap-4">
-              {/* Stat 1: Checkings */}
-              <View className="flex-1 min-w-[45%] bg-surface-container-lowest rounded-xl p-6 border border-outline-variant shadow-sm overflow-hidden relative">
-                <View className="absolute -right-4 -top-4 w-20 h-20 bg-secondary-container/30 rounded-full" />
-                <View className="flex-col gap-2 relative z-10">
-                  <View className="flex-row items-center justify-between">
-                    <MaterialIcons name="assignment" size={24} color="#505f76" />
-                  </View>
-                  <Text className="text-[32px] leading-[40px] font-bold text-on-surface mt-2">{stats.checkingCount}</Text>
-                  <Text className="text-xs font-medium text-on-surface-variant">Checkings</Text>
+              {/* Stat 1: Total Checkings */}
+              <View className="w-[47%] bg-surface-container-lowest rounded-xl p-5 border border-outline-variant shadow-sm overflow-hidden relative">
+                <View className="absolute -right-4 -top-4 w-16 h-16 bg-secondary-container/30 rounded-full" />
+                <View className="flex-col gap-1 relative z-10">
+                  <MaterialIcons name="assignment" size={24} color="#505f76" />
+                  <Text className="text-[28px] leading-[36px] font-bold text-on-surface mt-2">{stats.checkingCount}</Text>
+                  <Text className="text-[11px] font-medium text-on-surface-variant uppercase">Total Tasks</Text>
                 </View>
               </View>
 
-              {/* Stat 2: Expenses Count */}
-              <View className="flex-1 min-w-[45%] bg-surface-container-lowest rounded-xl p-6 border border-outline-variant shadow-sm overflow-hidden relative">
-                <View className="absolute -right-4 -top-4 w-20 h-20 bg-error-container/30 rounded-full" />
-                <View className="flex-col gap-2 relative z-10">
-                  <View className="flex-row items-center justify-between">
-                    <MaterialIcons name="receipt-long" size={24} color="#ba1a1a" />
-                  </View>
-                  <Text className="text-[32px] leading-[40px] font-bold text-on-surface mt-2">{stats.expensesCount}</Text>
-                  <Text className="text-xs font-medium text-on-surface-variant">Expense Reports</Text>
+              {/* Stat 2: Checkings This Month */}
+              <View className="w-[47%] bg-surface-container-lowest rounded-xl p-5 border border-outline-variant shadow-sm overflow-hidden relative">
+                <View className="absolute -right-4 -top-4 w-16 h-16 bg-emerald-50 rounded-full" />
+                <View className="flex-col gap-1 relative z-10">
+                  <MaterialIcons name="fact-check" size={24} color="#059669" />
+                  <Text className="text-[28px] leading-[36px] font-bold text-on-surface mt-2">{stats.checkingMonthCount}</Text>
+                  <Text className="text-[11px] font-medium text-on-surface-variant uppercase">This Month</Text>
                 </View>
               </View>
 
-              {/* Stat 3: Total Expenses Volume */}
-              <View className="w-full bg-surface-container-lowest rounded-xl p-6 border border-outline-variant shadow-sm overflow-hidden relative">
-                <View className="absolute -right-4 -top-4 w-20 h-20 bg-primary-container/20 rounded-full" />
-                <View className="flex-col gap-2 relative z-10">
-                  <View className="flex-row items-center justify-between">
-                    <MaterialIcons name="payments" size={24} color="#00236f" />
-                  </View>
-                  <Text className="text-[32px] leading-[40px] font-bold text-on-surface mt-2">{formatIDR(stats.expensesTotal)}</Text>
-                  <Text className="text-xs font-medium text-on-surface-variant">Total Expense Volume</Text>
+              {/* Stat 3: Expenses Count */}
+              <View className="w-[47%] bg-surface-container-lowest rounded-xl p-5 border border-outline-variant shadow-sm overflow-hidden relative">
+                <View className="absolute -right-4 -top-4 w-16 h-16 bg-error-container/30 rounded-full" />
+                <View className="flex-col gap-1 relative z-10">
+                  <MaterialIcons name="receipt-long" size={24} color="#ba1a1a" />
+                  <Text className="text-[28px] leading-[36px] font-bold text-on-surface mt-2">{stats.expensesCount}</Text>
+                  <Text className="text-[11px] font-medium text-on-surface-variant uppercase">Total Expenses</Text>
+                </View>
+              </View>
+
+              {/* Stat 4: Total Expenses Volume */}
+              <View className="w-[47%] bg-surface-container-lowest rounded-xl p-5 border border-outline-variant shadow-sm overflow-hidden relative">
+                <View className="absolute -right-4 -top-4 w-16 h-16 bg-primary-container/20 rounded-full" />
+                <View className="flex-col gap-1 relative z-10">
+                  <MaterialIcons name="payments" size={24} color="#00236f" />
+                  <Text className="text-xl font-bold text-on-surface mt-2" numberOfLines={1}>{formatIDR(stats.expensesTotal)}</Text>
+                  <Text className="text-[11px] font-medium text-on-surface-variant uppercase">Total Volume</Text>
                 </View>
               </View>
             </View>

@@ -1,11 +1,14 @@
 import { View, Text, FlatList, Pressable, RefreshControl, ActivityIndicator } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { supabase } from '@/lib/supabase';
 import { Expense } from '@/types';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function ExpensesScreen() {
   const { session } = useAuth();
+  const router = useRouter();
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -123,6 +126,15 @@ export default function ExpensesScreen() {
           <Text className="text-primary font-bold text-lg">{formatIDR(selectedTotal)}</Text>
         </View>
       </View>
+
+      {/* FAB — Add Expense */}
+      <Pressable
+        onPress={() => router.push('/(staff)/add-expense')}
+        className="absolute bottom-20 right-5 bg-primary rounded-2xl px-5 py-3.5 flex-row items-center gap-2 shadow-lg active:scale-95"
+      >
+        <MaterialIcons name="add" size={22} color="#ffffff" />
+        <Text className="text-on-primary font-bold text-sm">Add Expense</Text>
+      </Pressable>
     </View>
   );
 }

@@ -2,17 +2,16 @@ import { Tabs } from 'expo-router';
 import { View, Text, Pressable } from 'react-native';
 import { useAuth } from '@/lib/auth-context';
 import { MaterialIcons } from '@expo/vector-icons';
-
 export default function StaffLayout() {
-  const { signOut } = useAuth();
+  const { profile, signOut } = useAuth();
 
   return (
     <Tabs
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#f7f9fb', // bg-surface
+          backgroundColor: '#f7f9fb',
           borderBottomWidth: 1,
-          borderBottomColor: '#c5c5d3', // border-outline-variant
+          borderBottomColor: '#c5c5d3',
         },
         headerTintColor: '#191c1e',
         tabBarStyle: {
@@ -20,8 +19,8 @@ export default function StaffLayout() {
           borderTopWidth: 1,
           borderTopColor: '#c5c5d3',
         },
-        tabBarActiveTintColor: '#1e3a8a', // text-primary-container
-        tabBarInactiveTintColor: '#757682', // text-outline
+        tabBarActiveTintColor: '#1e3a8a',
+        tabBarInactiveTintColor: '#757682',
         headerRight: () => (
           <Pressable onPress={signOut} className="mr-4 w-10 h-10 rounded-full items-center justify-center bg-surface-container-highest">
             <MaterialIcons name="logout" size={20} color="#ba1a1a" />
@@ -44,10 +43,10 @@ export default function StaffLayout() {
         }}
       />
       <Tabs.Screen
-        name="add-expense"
+        name="tasks"
         options={{
-          title: 'Add Rp',
-          tabBarIcon: ({ color }) => <MaterialIcons name="add-card" size={24} color={color} />,
+          title: 'Tasks',
+          tabBarIcon: ({ color }) => <MaterialIcons name="assignment" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
@@ -62,6 +61,14 @@ export default function StaffLayout() {
         options={{
           title: 'AI Refiner',
           tabBarIcon: ({ color }) => <MaterialIcons name="auto-awesome" size={24} color={color} />,
+        }}
+      />
+      {/* Hidden from tabs but still navigable */}
+      <Tabs.Screen
+        name="add-expense"
+        options={{
+          href: null,
+          title: 'Add Expense',
         }}
       />
     </Tabs>

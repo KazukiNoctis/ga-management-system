@@ -1,37 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Pressable, FlatList, ActivityIndicator, Alert } from 'react-native';
 import { supabase } from '@/lib/supabase';
-import { Profile, Branch } from '@/types';
+import { Profile } from '@/types';
 import { MaterialIcons } from '@expo/vector-icons';
 
-type ProfileWithBranch = Profile & { branches?: { name: string } | null };
-
 export default function MembersScreen() {
-  const [members, setMembers] = useState<ProfileWithBranch[]>([]);
-  const [branches, setBranches] = useState<Branch[]>([]);
+  const [members, setMembers] = useState<Profile[]>([]);
   const [loading, setLoading] = useState(true);
   
   // Edit state
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editName, setEditName] = useState('');
-  const [editBranchId, setEditBranchId] = useState<string>('');
   
   const fetchData = async () => {
     try {
       setLoading(true);
-      // Fetch branches for edit dropdown
-      const { data: bData } = await supabase.from('branches').select('*');
-      if (bData) setBranches(bData as Branch[]);
-      
       // Fetch members
       const { data, error } = await supabase
         .from('profiles')
-        .select('*, branches(name)')
+        .select('*')
         .eq('role', 'staff')
         .order('created_at', { ascending: false });
         
       if (error) throw error;
-      if (data) setMembers(data as any);
+      if (data) setMembers(data as Profile[]);
     } catch (error: any) {
       Alert.alert('Error', error.message);
     } finally {
@@ -62,10 +54,9 @@ export default function MembersScreen() {
     ]);
   };
 
-  const startEdit = (member: ProfileWithBranch) => {
+  const startEdit = (member: Profile) => {
     setEditingId(member.id);
     setEditName(member.full_name);
-    setEditBranchId(member.branch_id || '');
   };
 
   const saveEdit = async () => {
@@ -78,7 +69,6 @@ export default function MembersScreen() {
         .from('profiles')
         .update({ 
           full_name: editName,
-          branch_id: editBranchId || null
         })
         .eq('id', editingId);
         
@@ -90,7 +80,7 @@ export default function MembersScreen() {
     }
   };
 
-  const renderItem = ({ item }: { item: ProfileWithBranch }) => {
+  const renderItem = ({ item }: { item: Profile }) => {
     if (editingId === item.id) {
       return (
         <View className="bg-surface-container-lowest p-4 rounded-xl border border-primary shadow-sm mb-4">
@@ -102,29 +92,7 @@ export default function MembersScreen() {
             value={editName}
             onChangeText={setEditName}
           />
-          <Text className="text-xs text-on-surface-variant mb-1">Select Branch:</Text>
-          <View className="flex-row flex-wrap gap-2 mb-4">
-            <Pressable
-              onPress={() => setEditBranchId('')}
-              className={`px-3 py-1.5 rounded-full border ${
-                !editBranchId ? 'bg-primary border-primary' : 'bg-surface-container-lowest border-outline-variant'
-              }`}
-            >
-              <Text className={`text-xs ${!editBranchId ? 'text-on-primary font-bold' : 'text-on-surface'}`}>None</Text>
-            </Pressable>
-            {branches.map(b => (
-              <Pressable
-                key={b.id}
-                onPress={() => setEditBranchId(b.id)}
-                className={`px-3 py-1.5 rounded-full border ${
-                  editBranchId === b.id ? 'bg-primary border-primary' : 'bg-surface-container-lowest border-outline-variant'
-                }`}
-              >
-                <Text className={`text-xs ${editBranchId === b.id ? 'text-on-primary font-bold' : 'text-on-surface'}`}>{b.name}</Text>
-              </Pressable>
-            ))}
-          </View>
-          <View className="flex-row gap-2 justify-end">
+          <View className="flex-row gap-2 justify-end mt-4">
             <Pressable 
               className="bg-surface-container-high px-4 py-2 rounded-lg"
               onPress={() => setEditingId(null)}
@@ -147,10 +115,7 @@ export default function MembersScreen() {
         <View className="flex-row justify-between items-start">
           <View className="flex-1">
             <Text className="text-on-surface text-lg font-bold">{item.full_name}</Text>
-            <Text className="text-on-surface-variant mt-1">
-              🏢 {item.branches?.name || 'No Branch Assigned'}
-            </Text>
-            <Text className="text-outline text-xs mt-2">
+            <Text className="text-outline text-xs mt-1">
               Joined: {item.created_at ? new Date(item.created_at).toLocaleDateString() : 'Unknown'}
             </Text>
           </View>
