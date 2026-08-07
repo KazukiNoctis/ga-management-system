@@ -15,6 +15,7 @@ function RootLayoutNav() {
     const inAuthGroup = segments[0] === '(auth)';
     const inAdminGroup = segments[0] === 'admin';
     const inPublicGroup = segments[0] === '(public)';
+    const inStaffGroup = segments[0] === '(staff)';
 
     if (!session) {
       if (!inAuthGroup && !inPublicGroup) {
@@ -29,8 +30,9 @@ function RootLayoutNav() {
         return;
       }
       
-      // If user is authenticated and in the auth group, public group, or root, redirect them to the correct dashboard
-      if (inAuthGroup || inPublicGroup || !segments.length) {
+      // Redirect authenticated users to the correct dashboard
+      // Covers: login page, public pages, root, and wrong-role group
+      if (inAuthGroup || inPublicGroup || !segments.length || (inStaffGroup && isAdmin)) {
         if (isAdmin) {
           router.replace('/admin');
         } else {
